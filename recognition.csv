@@ -4,7 +4,8 @@ Research,Production,Databases,Count,re3data,5
 Research,Production,Protocols,Count,protocols.io,3
 Research,Production,Datasets,Count,dataverse,5
 Research,Production,Software,Count,depsy,4
-Research,Production,Preprints,Yes/No,arXiv,3
-Research,Activity,Software re-use,Count,depsy,4
+Research,Production,Preprints,Percentage,arXiv,3
+Research,Activity,Software re-use,Count,depsy,2
 Research,Activity,Peer Review,Count,PubPeer,4
 Research,Impact,Publications,Citations,CrossRef,3
+Research,Impact,Software re-use,Citations,depsy,4
