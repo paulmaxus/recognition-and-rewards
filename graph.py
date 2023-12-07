@@ -4,7 +4,7 @@ import streamlit as st
 from streamlit_agraph import agraph, Node, Edge, Config
 
 
-def recognition():
+def run():
 
     # load data
     df = pd.read_csv("recognition.csv")
@@ -35,20 +35,22 @@ def recognition():
                 id=row["Indicator"],
                 label=row["Indicator"],
                 size=30,
-                color="grey",
+                color="lightgrey",
+                shape='circle',  # circle has inside label: 
+                #font={"color": "white"},
             )
         )
     # create nodes from column Source, with color grey, contains duplicates
-    df_source = df[["Source"]].drop_duplicates().dropna()
-    for i, row in df_source.iterrows():
-        nodes.append(
-            Node(
-                id=row["Source"],
-                label=row["Source"],
-                size=20,
-                color="red",
-            )
-        )
+    #df_source = df[["Source"]].drop_duplicates().dropna()
+    #for i, row in df_source.iterrows():
+    #    nodes.append(
+    #        Node(
+    #            id=row["Source"],
+    #            label=row["Source"],
+    #            size=20,
+    #            color="red",
+    #        )
+    #    )
     # create edges between Indicator and Output where column Metric is the edge label, edge width is column Impact
     # create edges between Output and Source
     for i, row in df.iterrows():
@@ -58,19 +60,21 @@ def recognition():
                 target=row["Output"]+row["Domain"],
                 label=row["Metric"],
                 width=row["Impact"],
+                font={"size": 13},
                 
             )
         )
-        edges.append(
-            Edge(
-                source=row["Output"]+row["Domain"],
-                target=row["Source"],
-            )
-        )
+        #edges.append(
+        #    Edge(
+        #        source=row["Output"]+row["Domain"],
+        #        target=row["Source"],
+        #    )
+        #)
     # show graph
     agraph(nodes=nodes, edges=edges, config=c)
     
 
 st.set_page_config(page_title="R&R", page_icon="📈")
 
-recognition()
+if __name__ == "__main__":
+    run()
