@@ -28,13 +28,16 @@ def run():
             )
         )
     # create nodes from column Indicator, with color grey, contains duplicates
-    df_indicator = df[["Indicator"]].drop_duplicates()
-    for i, row in df_indicator.iterrows():
+    indicators = df["Indicator"].drop_duplicates()
+    # inside labels determine node size so pad to the largest 
+    max_len = indicators.apply(len).max()
+    max_loc = indicators.apply(len).idxmax()
+    for i, indicator in enumerate(indicators):
         nodes.append(
             Node(
-                id=row["Indicator"],
-                label=row["Indicator"],
-                size=30,
+                id=indicator,
+                label=f"{indicator:^{max_len+2 if i!=max_loc else max_len}}",
+                #size=30,
                 color="lightgrey",
                 shape='circle',  # circle has inside label: 
                 #font={"color": "white"},
